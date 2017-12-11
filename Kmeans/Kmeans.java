@@ -1,6 +1,3 @@
-import java.io.BufferedWriter;
-import java.io.FileOutputStream;
-import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -16,9 +13,10 @@ public class Kmeans {
 	private ArrayList<ArrayList<float[]>> cluster; // 分成的簇
 	private Random random;
 
-	// 初始化质心,从数据集中随机选取K个点
+	// 初始化质心,从数据集中随机选取前K个点
 	private ArrayList<float[]> initCentroids() {
 		ArrayList<float[]> NewCentroids = new ArrayList<float[]>();
+		/*
 		int[] randoms = new int[k];
 		int temp = random.nextInt(dataNum);
 		HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
@@ -31,10 +29,9 @@ public class Kmeans {
 				temp = random.nextInt(dataNum);
 			map.put(temp, 1);
 			randoms[i] = temp;
-		}
+		}*/
 		for (int i = 0; i < k; i++)
-			NewCentroids.add(dataSet.get(randoms[i]));
-
+			NewCentroids.add(dataSet.get(i));
 		return NewCentroids;
 	}
 
@@ -171,22 +168,6 @@ public class Kmeans {
 		long endTime = System.currentTimeMillis();
 		System.out.println("Time used: " + (endTime - startTime) + "ms");
 		System.out.println("Kmeans ends");
-	}
-
-	public void printDataArray(ArrayList<float[]> dataArray, String dataArrayName) {
-		try {
-			OutputStreamWriter output = new OutputStreamWriter(new FileOutputStream("Output.txt"),"UTF-8");
-			BufferedWriter bw = new BufferedWriter(output);
-			for (int i = 0; i < dataArray.size(); i++) {
-					bw.write(dataArrayName + "[" + i + "]={" + dataArray.get(i)[0] + "," + dataArray.get(i)[1] + "}");
-					bw.newLine();
-			}
-			bw.flush();  
-			bw.close();
-			output.close();
-		}catch(Exception e) {
-			System.out.println(e);
-		}
 	}
 
 }
