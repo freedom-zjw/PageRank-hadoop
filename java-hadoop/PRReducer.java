@@ -37,14 +37,14 @@ public class PRReducer extends Reducer<Text, Text, Text, Text> {
         }
         double sum=0;
         for(Map.Entry<String,Double> entry: PR.entrySet()){
-            sum += M.get(entry.getKey()) * entry.getValue(); //M*PR
+            sum += M.get(entry.getKey()) * entry.getValue(); //计算PageRank基础模型 sigma(M[key]*PR[key])
         }
         double newPR = damping*sum + (1-damping)/num; //根据公式计算当前页的新PR值
 
         System.out.println("    ");
         System.out.println(String.valueOf(key) + "'s New PageRank is " + String.valueOf(newPR));
         /*
-            按照MAPPER中的输入格式输入
+            按照MAPPER中的输入格式输出
             当前页 当前页的PR值：可跳转页1，可跳转页2，....
         */
         context.write(key, new Text(String.valueOf(newPR)+":"+nextPage));
