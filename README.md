@@ -1,6 +1,6 @@
 # PageRank
 
-###Environment
+### Environment
 
  	1. install jdk 
  	2. install hadoop
